@@ -1,25 +1,31 @@
 from flask import Flask, render_template, request, json
-import socket
 
+
+
+# Doan ma khoi tao server
 app = Flask(__name__)
 
-ip = socket.gethostbyname(socket.gethostname())
 
-
+# Khai bao ham xu ly request inde
 @app.route("/")
 def main():
-    test = "test"
-    return test
+    return render_template('index.html')
 
-
-@app.route("/api/recognize", methods=['POST'])
+# Khai bao ham xu ly request detect
+@app.route('/api/recognize', methods=['POST'])
 def detect():
-    imageString = json.loads(request.data)['code']
-    print(imageString)
-    res = "test"
+
+    # Lay du lieu image B64 gui len va chuyen thanh image
+    image_b64 = json.loads(request.data)['code']
+    print (image_b64)
     
+    res = "test"
+
+    
+    print (res)
     return json.dumps(res)
 
 
-if __name__ == "__main__":
+# Thuc thi server
+if __name__ == '__main__':
     app.run(debug=True)
